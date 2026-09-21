@@ -17,12 +17,13 @@ GitHub 저장소 (screamingpeanut01/ku_entbs_page)
     ├ contact.html             오시는 길
     ├ data/content.js          ★ 모든 콘텐츠(공지, 연구진, 성과…)가 이 파일 하나에 있음
     └ assets/                  디자인(style.css), 공통 스크립트(main.js), 이미지, 첨부파일
- └ .github/workflows/deploy.yml   main 브랜치에 push되면 자동 배포
+ └ .github/workflows/deploy.yml   main 브랜치에 push되면 site/ 를 gh-pages 브랜치로 복사(자동 배포)
  └ docs/                       계획서, 이 가이드
 ```
 
 - **서버·DB 없음.** HTML/CSS/JS 파일만 GitHub Pages에 올라갑니다. 호스팅 비용 0원.
-- **자동 배포.** `main` 브랜치의 `site/` 폴더가 바뀌면 1~2분 내 사이트에 반영됩니다.
+- **자동 배포.** `main` 브랜치의 `site/` 폴더가 바뀌면 GitHub Actions가 `gh-pages` 브랜치에 복사하고, GitHub Pages가 그 브랜치를 서빙합니다. 1~2분 내 반영.
+- `gh-pages` 브랜치는 자동 생성물이므로 **직접 편집하지 않습니다.** 항상 `main`의 `site/`만 수정합니다.
 - 배포 주소(테스트): `https://screamingpeanut01.github.io/ku_entbs_page/`
 
 ## 2. 콘텐츠 수정 방법 (가장 쉬운 방법: GitHub 웹에서 직접 편집)
@@ -108,8 +109,11 @@ notices: [
 권장: 센터 운영비로 결제할 수 있도록 **가비아**에서 구매하고 소유자 정보는 센터/교수님 명의로.
 
 ### 5-2. GitHub Pages에 도메인 연결
-1. 저장소 → Settings → Pages → **Custom domain** 에 `test-entbs.com` 입력 → Save
-   (GitHub이 `site/CNAME` 파일을 자동 생성. 워크플로우 배포 방식이므로 `site/` 폴더에 `CNAME` 파일을 직접 만들어 도메인 한 줄을 넣고 커밋해도 됨)
+1. `main` 브랜치의 `site/` 폴더에 `CNAME` 파일(확장자 없음)을 만들고 도메인 한 줄만 적어 커밋
+   ```
+   test-entbs.com
+   ```
+   배포되면 저장소 → Settings → Pages → Custom domain 에 자동 반영됨. (Settings에서 직접 입력하면 gh-pages 브랜치에만 기록되어 다음 배포 때 지워지므로 반드시 `site/CNAME`으로 관리)
 2. 도메인 등록업체 DNS 설정에 아래 레코드 추가
    ```
    A     @    185.199.108.153
