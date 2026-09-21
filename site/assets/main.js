@@ -21,7 +21,7 @@
   document.getElementById('site-header').innerHTML = `
     <div class="container">
       <a class="brand" href="index.html">
-        <span class="mark">KU</span>
+        ${S.logo ? `<img class="mark" src="${S.logo}" alt="">` : '<span class="mark">KU</span>'}
         <span class="name">${S.name.ko}<small>${S.name.en}</small></span>
       </a>
       <nav class="nav" id="nav">${navHtml}</nav>
@@ -40,6 +40,11 @@
         <div style="margin-top:14px"><a href="admin/" style="font-size:.8rem;opacity:.6">관리자</a></div></div>
       <div class="copy">&copy; ${new Date().getFullYear()} ${S.name.en}, Korea University. All rights reserved.</div>
     </div>`;
+  const hero = document.querySelector('.hero');
+  if (hero && S.heroImage) {
+    hero.classList.add('has-img');
+    hero.style.backgroundImage = `linear-gradient(120deg, rgba(43,0,16,.85), rgba(139,0,41,.6)), url("${S.heroImage}")`;
+  }
   if (S.testBanner) {
     const b = document.createElement('div');
     b.className = 'banner';

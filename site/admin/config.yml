@@ -37,6 +37,7 @@ collections:
               - { name: date, label: 날짜, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
               - { name: pinned, label: 상단 고정, widget: boolean, default: false, required: false }
               - { name: body, label: 본문, widget: text, required: false }
+              - { name: image, label: 사진, widget: image, required: false }
               - { name: file, label: 첨부파일, widget: file, required: false }
 
   - name: news
@@ -183,6 +184,8 @@ collections:
               - { name: en, label: 영문(큰 제목), widget: string }
               - { name: ko, label: 국문(부제), widget: string }
           - { name: testBanner, label: 상단 안내 배너 (비우면 숨김), widget: string, required: false }
+          - { name: logo, label: 로고 이미지 (비우면 KU 글자 마크), widget: image, required: false, hint: "정사각형 PNG/SVG 권장" }
+          - { name: heroImage, label: 홈 배너 사진 (비우면 단색 배경), widget: image, required: false, hint: "가로 1600px 이상 권장. 어두운 톤이 글자와 잘 어울립니다" }
           - name: contact
             label: 연락처
             widget: object

@@ -59,7 +59,8 @@ GitHub 저장소 (screamingpeanut01/ku_entbs_page)
 - 관리자 화면의 사진/파일 필드에서 업로드하면 `site/assets/uploads/`에 저장되고 경로가 자동 입력됩니다.
 - GitHub에서 직접 올릴 때는 `site/assets/uploads/` → **Add file → Upload files**, JSON에는 `"assets/uploads/파일명.pdf"` 로 연결
 - 파일명은 영문·숫자·하이픈 권장 (예: `2026-workshop.pdf`)
-- 히어로 배경 사진: `site/assets/hero.jpg`로 올린 뒤 `style.css`의 `.hero` 배경에 연결 (개발 가능자)
+- 홈 배너 사진·로고: 관리자 화면 → 소개·설정 → 사이트 설정 → "홈 배너 사진", "로고 이미지"에서 업로드. 비우면 기본(단색 배경, KU 마크)으로 돌아감
+- 공지 사진: 공지 항목의 "사진" 필드. 소식은 "대표 이미지", 연구진은 "사진", 인사말은 "사진" 필드
 
 ## 5. 저장소 관리
 
