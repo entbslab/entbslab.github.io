@@ -7,22 +7,6 @@
 <title>관리자 | 엔터테인먼트경영연구센터</title>
 <!-- Sveltia CMS: Decap CMS 호환 오픈소스 관리 화면. 설정은 config.yml -->
 <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" type="module"></script>
-<style>
-  #setup-note{position:fixed;left:0;right:0;top:0;z-index:99999;background:#fff4cc;color:#5a4300;font:14px/1.5 system-ui,sans-serif;padding:10px 16px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.15)}
-  #setup-note b{color:#8B0029}
-</style>
 </head>
-<body>
-<script>
-  // config.yml 의 base_url 이 아직 자리표시자(REPLACE-ME)이면 안내 문구 표시
-  fetch('config.yml', { cache: 'no-cache' }).then(r => r.text()).then(t => {
-    if (/base_url:\s*https?:\/\/REPLACE-ME/i.test(t)) {
-      const d = document.createElement('div');
-      d.id = 'setup-note';
-      d.innerHTML = '<b>GitHub 로그인 버튼은 아직 설정 전입니다.</b> 아래 <b>Sign In Using Access Token</b> 으로 로그인하세요. (토큰 발급: docs/ADMIN_SETUP.md 0단계 · GitHub 로그인 설정: 1~4단계)';
-      document.body.prepend(d);
-    }
-  }).catch(() => {});
-</script>
-</body>
+<body></body>
 </html>
