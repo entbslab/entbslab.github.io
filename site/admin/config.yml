@@ -14,9 +14,7 @@ backend:
     uploadMedia: "관리자: 파일 업로드 {{path}}"
     deleteMedia: "관리자: 파일 삭제 {{path}}"
 
-site_url: https://screamingpeanut01.github.io/ku_entbs_page/
-display_url: https://screamingpeanut01.github.io/ku_entbs_page/
-
+# site_url 은 생략: 도메인이 바뀌어도 이 파일을 고칠 필요가 없도록 상대 경로로 동작
 media_folder: site/assets/uploads   # 저장소 안의 실제 경로
 public_folder: assets/uploads       # 사이트에서 참조하는 경로
 

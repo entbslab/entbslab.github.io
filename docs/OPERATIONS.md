@@ -109,7 +109,8 @@ GitHub 저장소 (screamingpeanut01/ku_entbs_page)
    CNAME www  screamingpeanut01.github.io
    ```
 3. 10분~수 시간 후 Settings → Pages 에서 DNS check 성공 → **Enforce HTTPS** 체크
-4. 관리자 화면 관련 3곳 갱신: GitHub OAuth 앱의 Homepage URL, Worker의 `ALLOWED_DOMAINS`, `site/admin/config.yml`의 `site_url`/`display_url`
+4. www 주소는 GitHub Pages가 자동으로 apex 도메인으로 넘겨줍니다. 사이트 코드에는 도메인이 들어 있지 않아 고칠 파일이 없습니다.
+5. 관리자 화면 GitHub 로그인을 설정했다면 2곳 갱신: GitHub OAuth 앱의 Homepage URL, Worker의 `ALLOWED_DOMAINS`. 토큰 로그인만 쓰는 동안은 할 일 없음
 
 ### 6-3. Cloudflare Pages로 옮길 경우 (선택)
 대역폭 무제한과 DDoS 보호가 필요해지면 Cloudflare Pages로 이전 가능. Pages → Connect to Git → 이 저장소 → Build output directory `site` → Custom domain 추가. 저장소·콘텐츠·관리자 화면은 그대로.
