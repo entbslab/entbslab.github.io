@@ -6,7 +6,6 @@
 <title>오시는 길 | 엔터테인먼트경영연구센터</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="assets/style.css">
-<script src="data/content.js"></script>
 </head>
 <body>
 <header class="site-header" id="site-header"></header>
@@ -29,7 +28,7 @@
         <dt>주소</dt><dd id="addr"></dd>
         <dt>전화</dt><dd id="tel"></dd>
         <dt>이메일</dt><dd id="email"></dd>
-        <dt>교통</dt><dd>지하철 6호선 안암역(고대병원앞) 1번 출구 도보 10분</dd>
+        <dt>교통</dt><dd id="transit"></dd>
       </dl>
       <p style="margin-top:20px"><a class="btn" id="map-link" target="_blank" rel="noopener">지도에서 보기</a></p>
     </aside>
@@ -37,13 +36,15 @@
 </section>
 
 <footer class="site-footer" id="site-footer"></footer>
-<script src="assets/main.js"></script>
 <script>
-  const S = window.SITE;
+window.render = function (S) {
   document.getElementById('addr').textContent = S.contact.address;
   document.getElementById('tel').textContent = S.contact.tel;
   document.getElementById('email').innerHTML = `<a href="mailto:${S.contact.email}">${S.contact.email}</a>`;
-  document.getElementById('map-link').href = S.contact.mapUrl;
+  document.getElementById('transit').textContent = S.contact.transit || '';
+  document.getElementById('map-link').href = S.contact.mapUrl || '#';
+};
 </script>
+<script src="assets/main.js"></script>
 </body>
 </html>

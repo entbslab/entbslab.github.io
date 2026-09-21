@@ -1,0 +1,14 @@
+{
+  "items": [
+    { "name": "김정환", "role": "센터장", "aff": "고려대학교 미디어학부 / 글로벌엔터테인먼트학부", "email": "evolve@korea.ac.kr", "field": "엔터테인먼트 · 플랫폼 · 테크놀로지", "photo": "" },
+    { "name": "김성철", "role": "공동연구원", "aff": "고려대학교 미디어학부", "email": "", "field": "", "photo": "" },
+    { "name": "최세정", "role": "공동연구원", "aff": "고려대학교 미디어학부", "email": "", "field": "", "photo": "" },
+    { "name": "정윤혁", "role": "공동연구원", "aff": "고려대학교 미디어학부", "email": "", "field": "", "photo": "" },
+    { "name": "최보름", "role": "공동연구원", "aff": "연세대학교", "email": "", "field": "", "photo": "" },
+    { "name": "조성인", "role": "공동연구원", "aff": "서강대학교", "email": "", "field": "", "photo": "" },
+    { "name": "김주희", "role": "공동연구원", "aff": "동덕여자대학교", "email": "", "field": "", "photo": "" },
+    { "name": "임철민", "role": "공동연구원", "aff": "전북대학교", "email": "", "field": "", "photo": "" },
+    { "name": "김진주", "role": "공동연구원", "aff": "Erasmus University", "email": "", "field": "", "photo": "" },
+    { "name": "하진경", "role": "Research Fellow", "aff": "박사", "email": "", "field": "", "photo": "" }
+  ]
+}

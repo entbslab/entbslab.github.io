@@ -1,6 +1,21 @@
-/* 공통 헤더/푸터 렌더링 + 유틸. 콘텐츠는 data/content.js 에서 관리합니다. */
-(function () {
-  const S = window.SITE;
+/* 공통 스크립트
+   - data/*.json 을 읽어 window.SITE 로 합친 뒤, 헤더/푸터를 그리고 각 페이지의 render(S) 를 호출합니다.
+   - 콘텐츠는 /admin 관리 화면(또는 GitHub에서 data/*.json 직접 편집)으로 수정합니다. */
+(async function () {
+  const get = f => fetch('data/' + f + '.json', { cache: 'no-cache' }).then(r => r.json());
+  const [settings, about, members, notices, news, research, resources] = await Promise.all(
+    ['settings', 'about', 'members', 'notices', 'news', 'research', 'resources'].map(get));
+  const S = window.SITE = {
+    ...settings, ...about,
+    members: members.items || [],
+    notices: notices.items || [],
+    news: news.items || [],
+    projects: research.projects || [],
+    publications: research.publications || [],
+    seminars: research.seminars || [],
+    resources: resources.items || []
+  };
+
   const path = location.pathname.split('/').pop() || 'index.html';
   const navHtml = S.nav.map(n => `<a href="${n.href}" class="${n.href === path ? 'active' : ''}">${n.label}</a>`).join('');
   document.getElementById('site-header').innerHTML = `
@@ -21,7 +36,8 @@
         <div>TEL ${S.contact.tel} &middot; <a href="mailto:${S.contact.email}">${S.contact.email}</a></div>
       </div>
       <div><h4>Menu</h4>${S.nav.map(n => `<div><a href="${n.href}">${n.label}</a></div>`).join('')}</div>
-      <div><h4>Links</h4>${S.links.map(l => `<div><a href="${l.href}" target="_blank" rel="noopener">${l.label}</a></div>`).join('')}</div>
+      <div><h4>Links</h4>${S.links.map(l => `<div><a href="${l.href}" target="_blank" rel="noopener">${l.label}</a></div>`).join('')}
+        <div style="margin-top:14px"><a href="admin/" style="font-size:.8rem;opacity:.6">관리자</a></div></div>
       <div class="copy">&copy; ${new Date().getFullYear()} ${S.name.en}, Korea University. All rights reserved.</div>
     </div>`;
   if (S.testBanner) {
@@ -30,10 +46,16 @@
     b.textContent = S.testBanner;
     document.body.prepend(b);
   }
-})();
+  if (typeof window.render === 'function') window.render(S);
+})().catch(err => {
+  console.error(err);
+  document.getElementById('site-header').innerHTML = '<div class="container" style="color:#8B0029">데이터를 불러오지 못했습니다. data/*.json 형식을 확인하세요.</div>';
+});
 
-window.fmtDate = d => d.replace(/-/g, '.');
+window.fmtDate = d => (d || '').slice(0, 10).replace(/-/g, '.');
 window.initials = name => /[가-힣]/.test(name) ? name[0] : name.replace(/\s.*/, '').slice(0, 2);
+window.avatar = m => m.photo ? `<img class="avatar" src="${m.photo}" alt="${m.name}" style="object-fit:cover">` : `<div class="avatar">${initials(m.name)}</div>`;
+window.byDateDesc = (a, b) => (b.date || '').localeCompare(a.date || '');
 window.tabs = function (root) {
   const btns = root.querySelectorAll('.tabs button');
   const panels = root.querySelectorAll('.panel');
