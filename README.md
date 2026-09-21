@@ -11,8 +11,8 @@
 
 ## 로컬 미리보기
 ```bash
-npx serve -l 8080 site
+npm run dev
 ```
 
 ## 콘텐츠 수정
-`/admin/` 관리자 화면(Sveltia CMS, Decap 호환)에서 폼으로 편집하면 `site/data/*.json`에 커밋되고 GitHub Actions가 자동 배포합니다. JSON을 GitHub에서 직접 고쳐도 됩니다.
+`/admin/` 관리자 화면(Sveltia CMS, Decap 호환)에서 편집하면 `site/data/<컬렉션>/*.json`(한 건 = 파일 하나)에 커밋되고 GitHub Actions가 합본을 만들어 자동 배포합니다. JSON을 GitHub에서 직접 고쳐도 됩니다.
