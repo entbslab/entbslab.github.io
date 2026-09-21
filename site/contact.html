@@ -26,8 +26,8 @@
 
 <section class="section">
   <div class="container split">
-    <div>
-      <div class="thumb" style="aspect-ratio:16/11;margin:0">지도 (네이버/구글 지도 임베드 위치)</div>
+    <div id="map-box">
+      <div class="thumb" style="aspect-ratio:16/11;margin:0">지도</div>
     </div>
     <aside class="info-box">
       <dl>
@@ -49,6 +49,11 @@ window.render = function (S) {
   document.getElementById('email').innerHTML = `<a href="mailto:${S.contact.email}">${S.contact.email}</a>`;
   document.getElementById('transit').textContent = S.contact.transit || '';
   document.getElementById('map-link').href = S.contact.mapUrl || '#';
+  if (S.contact.mapEmbed) {
+    document.getElementById('map-box').innerHTML =
+      `<iframe src="${S.contact.mapEmbed}" title="지도" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+         style="width:100%;aspect-ratio:16/11;border:0;border-radius:10px" allowfullscreen></iframe>`;
+  }
 };
 </script>
 <script src="assets/main.js"></script>

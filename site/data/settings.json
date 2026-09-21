@@ -15,6 +15,7 @@
     "tel": "02-3290-5039",
     "email": "evolve@korea.ac.kr",
     "mapUrl": "https://map.naver.com/p/search/고려대학교%20미디어관",
+    "mapEmbed": "https://www.google.com/maps?q=고려대학교%20미디어관&z=17&hl=ko&output=embed",
     "transit": "지하철 6호선 안암역(고대병원앞) 1번 출구 도보 10분"
   },
   "nav": [

@@ -218,7 +218,8 @@ collections:
               - { name: address, label: 주소, widget: string }
               - { name: tel, label: 전화, widget: string }
               - { name: email, label: 이메일, widget: string }
-              - { name: mapUrl, label: 지도 링크, widget: string, required: false }
+              - { name: mapUrl, label: 지도 링크 (버튼용, 네이버 지도 등), widget: string, required: false }
+              - { name: mapEmbed, label: 지도 임베드 주소, widget: string, required: false, hint: "구글 지도: https://www.google.com/maps?q=주소&output=embed 형식. 비우면 지도 숨김" }
               - { name: transit, label: 교통 안내, widget: string, required: false }
           - name: nav
             label: 상단 메뉴
