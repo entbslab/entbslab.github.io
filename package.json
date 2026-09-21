@@ -1,0 +1,9 @@
+{
+  "name": "ku-entbs-page",
+  "private": true,
+  "description": "고려대학교 엔터테인먼트경영연구센터 홈페이지",
+  "scripts": {
+    "build": "node scripts/build-data.js",
+    "dev": "node scripts/build-data.js && npx --yes serve -l 8080 site"
+  }
+}

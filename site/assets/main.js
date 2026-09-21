@@ -3,16 +3,17 @@
    - 콘텐츠는 /admin 관리 화면(또는 GitHub에서 data/*.json 직접 편집)으로 수정합니다. */
 (async function () {
   const get = f => fetch('data/' + f + '.json', { cache: 'no-cache' }).then(r => r.json());
-  const [settings, about, members, notices, news, research, resources] = await Promise.all(
-    ['settings', 'about', 'members', 'notices', 'news', 'research', 'resources'].map(get));
+  const [settings, about, members, notices, news, projects, publications, seminars, resources] = await Promise.all(
+    ['settings', 'about', 'members', 'notices', 'news', 'projects', 'publications', 'seminars', 'resources'].map(get));
+  const byOrder = (a, b) => (a.order ?? 100) - (b.order ?? 100);
   const S = window.SITE = {
     ...settings, ...about,
-    members: members.items || [],
+    members: (members.items || []).sort(byOrder),
     notices: notices.items || [],
     news: news.items || [],
-    projects: research.projects || [],
-    publications: research.publications || [],
-    seminars: research.seminars || [],
+    projects: (projects.items || []).sort(byOrder),
+    publications: publications.items || [],
+    seminars: seminars.items || [],
     resources: resources.items || []
   };
 

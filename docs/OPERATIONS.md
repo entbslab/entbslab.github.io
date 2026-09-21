@@ -17,11 +17,12 @@ GitHub 저장소 (screamingpeanut01/ku_entbs_page)
     ├ contact.html             오시는 길
     ├ admin/                   ★ 관리자 화면 (사이트주소/admin/). 설정은 admin/config.yml
     ├ data/                    ★ 모든 콘텐츠. 관리자 화면이 이 파일들을 고침
-    │   ├ notices.json  news.json  members.json  research.json  resources.json
+    │   ├ notices/  news/  members/  projects/  publications/  seminars/  resources/   (한 건 = 파일 하나)
     │   ├ about.json    (설립 목적 · 활동분야 · 인사말)
-    │   └ settings.json (센터명 · 연락처 · 메뉴 · 배너)
+    │   └ settings.json (센터명 · 연락처 · 메뉴 · 로고 · 배너)
     └ assets/                  디자인(style.css), 공통 스크립트(main.js), uploads/(관리자 화면 업로드 파일)
- └ .github/workflows/deploy.yml   main 브랜치에 push되면 site/ 를 gh-pages 브랜치로 복사(자동 배포)
+ └ scripts/build-data.js       배포 시 data/<컬렉션>/*.json 을 data/<컬렉션>.json 하나로 합침 (사이트는 합본을 읽음)
+ └ .github/workflows/deploy.yml   main 브랜치에 push되면 합본 생성 후 site/ 를 gh-pages 브랜치로 복사(자동 배포)
  └ docs/                       계획서(PLAN), 개요(SUMMARY), 이 가이드, 관리자 설정(ADMIN_SETUP)
 ```
 
@@ -34,25 +35,25 @@ GitHub 저장소 (screamingpeanut01/ku_entbs_page)
 ## 2. 콘텐츠 수정 (기본: 관리자 화면)
 
 1. `사이트주소/admin/` 접속 → GitHub로 로그인 (최초 설정은 `docs/ADMIN_SETUP.md`)
-2. 왼쪽 메뉴에서 **공지사항 / 센터 소식 / 연구진 / 연구 활동 / 자료실 / 소개·설정** 선택
-3. 목록에서 **항목 추가** 또는 기존 항목 클릭 → 폼 입력 → **저장**
-4. 1~2분 뒤 사이트 새로고침(Ctrl+F5)으로 확인. 저장소 **Actions** 탭에 초록 체크가 뜨면 배포 완료
+2. 왼쪽 메뉴에서 **공지사항 / 센터 소식 / 연구진 / 연구 프로젝트 / 논문·출판 / 세미나·포럼 / 자료실** 선택 → 목록 화면
+3. **새 항목** 버튼으로 추가, 목록에서 항목 클릭으로 수정, 항목 화면의 **삭제**로 삭제 → **저장**
+4. 소개문·인사말·연락처·메뉴·로고·배너는 **소개·설정** 메뉴
+5. 1~2분 뒤 사이트 새로고침(Ctrl+F5)으로 확인. 저장소 **Actions** 탭에 초록 체크가 뜨면 배포 완료
 
-관리자 화면이 하는 일은 `site/data/*.json` 파일을 대신 고쳐 커밋하는 것뿐입니다. 그래서 아래 3절처럼 GitHub에서 직접 고쳐도 결과는 같습니다.
+관리자 화면이 하는 일은 `site/data/` 안의 JSON 파일을 대신 만들고 고쳐 커밋하는 것뿐입니다. 공지 한 건이 파일 하나(`site/data/notices/20260915-xxxx.json`)입니다. 그래서 아래 3절처럼 GitHub에서 직접 고쳐도 결과는 같습니다.
 
 ## 3. 콘텐츠 수정 (대안: GitHub 웹에서 JSON 직접 편집)
 
 관리자 화면이 잠시 안 될 때 쓰는 방법입니다. 저장소에 **Write 권한**이 있어야 합니다.
 
-1. GitHub에서 저장소 열기 → `site/data/notices.json` 등 클릭 → 연필 아이콘(Edit)
-2. 기존 블록 `{ ... }` 하나를 복사해 붙여넣고 값만 수정
-3. **Commit changes** → 한 줄 요약 입력 → **Commit directly to the main branch**
+- 수정: `site/data/notices/` 폴더에서 해당 파일 클릭 → 연필 아이콘(Edit) → 값 수정 → **Commit changes**
+- 추가: 기존 파일 하나를 열어 내용을 복사 → 폴더에서 **Add file → Create new file** → 파일명은 `20261001-abc.json`처럼 영문·숫자 → 붙여넣고 값 수정 → Commit
+- 삭제: 파일 열기 → 오른쪽 위 `...` → **Delete file** → Commit
 
 규칙
-- 날짜는 `"YYYY-MM-DD"`. 정렬은 자동(최신순, 고정공지 우선)
-- 블록 사이 쉼표 `,` 필수, 마지막 블록 뒤에는 쉼표 없음
+- 날짜는 `"YYYY-MM-DD"`. 정렬은 자동(최신순, 고정공지 우선). 연구진·프로젝트는 `order` 숫자 오름차순
 - 문장 안 큰따옴표는 `\"` 로 표기
-- 저장 후 Actions 탭에 빨간 X가 뜨거나 사이트가 흰 화면이면 문법 오류. **Commits → 해당 커밋 → Revert** 로 즉시 되돌림
+- 저장 후 Actions 탭에 빨간 X가 뜨면 그 파일의 문법 오류. 실행 로그에 파일명이 표시됨. **Commits → 해당 커밋 → Revert** 로 즉시 되돌림
 
 ## 4. 파일·사진
 

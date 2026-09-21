@@ -1,10 +1,10 @@
 name: Deploy to GitHub Pages
 
-# main 브랜치의 site/ 폴더가 바뀌면 gh-pages 브랜치로 복사 → GitHub Pages가 그 브랜치를 서빙
+# main 브랜치의 site/ 폴더가 바뀌면 데이터 합본을 만든 뒤 gh-pages 브랜치로 복사 → GitHub Pages가 그 브랜치를 서빙
 on:
   push:
     branches: [main]
-    paths: ["site/**", ".github/workflows/deploy.yml"]
+    paths: ["site/**", "scripts/**", ".github/workflows/deploy.yml"]
   workflow_dispatch:
 
 permissions:
@@ -19,6 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: 데이터 합본 생성 (site/data/*.json)
+        run: node scripts/build-data.js
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

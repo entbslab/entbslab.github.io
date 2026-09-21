@@ -1,3 +1,12 @@
 node_modules/
 .DS_Store
 Thumbs.db
+
+# 배포 시 scripts/build-data.js 가 생성하는 합본 파일 (원본은 site/data/<컬렉션>/*.json)
+site/data/notices.json
+site/data/news.json
+site/data/members.json
+site/data/projects.json
+site/data/publications.json
+site/data/seminars.json
+site/data/resources.json
