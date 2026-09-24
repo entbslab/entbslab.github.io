@@ -2,8 +2,8 @@
 
 고려대학교 미디어학부 엔터테인먼트경영연구센터(Center for Entertainment Strategy and Management) 홈페이지 목업.
 
-- 테스트 배포: https://screamingpeanut01.github.io/ku_entbs_page/
-- 관리자 화면: https://screamingpeanut01.github.io/ku_entbs_page/admin/
+- 테스트 배포: https://entbslab.github.io/entbs-lab/
+- 관리자 화면: https://entbslab.github.io/entbs-lab/admin/
 - 계획서: [docs/PLAN.md](docs/PLAN.md)
 - 운영 개요(작동·비용·계정): [docs/SUMMARY.md](docs/SUMMARY.md)
 - 운영·저장소 관리 가이드: [docs/OPERATIONS.md](docs/OPERATIONS.md)

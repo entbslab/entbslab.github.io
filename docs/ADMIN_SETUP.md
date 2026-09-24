@@ -18,7 +18,7 @@ Worker 없이도 관리 화면을 쓸 수 있는 임시 방법입니다. 관리�
 2. 입력값
    - Token name: `KU CESM admin`
    - Expiration: 1년 (만료되면 다시 발급)
-   - Repository access: **Only select repositories** → `ku_entbs_page` 선택
+   - Repository access: **Only select repositories** → `entbs-lab` 선택
    - Permissions → Repository permissions → **Contents: Read and write** (다른 권한은 불필요)
 3. **Generate token** → 표시된 토큰 문자열 복사 (이 화면을 벗어나면 다시 볼 수 없음)
 4. `/admin/` 접속 → **Sign In Using Access Token** → 토큰 붙여넣기 → 로그인
@@ -43,7 +43,7 @@ Worker 없이도 관리 화면을 쓸 수 있는 임시 방법입니다. 관리�
    | 항목 | 값 |
    |---|---|
    | Application name | `KU CESM 홈페이지 관리자` (아무 이름) |
-   | Homepage URL | `https://screamingpeanut01.github.io/ku_entbs_page/` (도메인 연결 후엔 그 주소) |
+   | Homepage URL | `https://entbslab.github.io/entbs-lab/` (도메인 연결 후엔 그 주소) |
    | Authorization callback URL | `https://ku-cesm-auth.<계정명>.workers.dev/callback` ← 1단계 주소 + `/callback` |
 3. **Register application** → 화면에 **Client ID** 표시
 4. **Generate a new client secret** → **Client Secret** 표시 (이 화면을 벗어나면 다시 볼 수 없으니 바로 4단계로)
@@ -56,7 +56,7 @@ Worker 없이도 관리 화면을 쓸 수 있는 임시 방법입니다. 관리�
    |---|---|
    | `GITHUB_CLIENT_ID` | 2단계의 Client ID |
    | `GITHUB_CLIENT_SECRET` | 2단계의 Client Secret |
-   | `ALLOWED_DOMAINS` | `screamingpeanut01.github.io` (도메인 연결 후엔 `test-entbs.com, www.test-entbs.com` 처럼 쉼표로 추가) |
+   | `ALLOWED_DOMAINS` | `entbslab.github.io` (도메인 연결 후엔 `test-entbs.com, www.test-entbs.com` 처럼 쉼표로 추가) |
 3. **Deploy** (또는 Save) 클릭
 
 ## 4단계. 사이트 설정 파일에 Worker 주소 입력
@@ -73,7 +73,7 @@ Worker 없이도 관리 화면을 쓸 수 있는 임시 방법입니다. 관리�
 
 ## 5단계. 로그인 확인
 
-1. `https://screamingpeanut01.github.io/ku_entbs_page/admin/` 접속
+1. `https://entbslab.github.io/entbs-lab/admin/` 접속
 2. **Sign in with GitHub** → GitHub 로그인 → 처음 한 번 **Authorize** 클릭
 3. 왼쪽에 공지사항 · 센터 소식 · 연구진 · 연구 활동 · 자료실 · 소개/설정 메뉴가 보이면 성공
 

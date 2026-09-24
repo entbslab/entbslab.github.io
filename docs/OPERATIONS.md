@@ -7,7 +7,7 @@
 ## 1. 구조 한눈에 보기
 
 ```
-GitHub 저장소 (screamingpeanut01/ku_entbs_page)
+GitHub 저장소 (entbslab/entbs-lab)
  └ site/                       ← 실제로 배포되는 웹사이트 폴더
     ├ index.html               홈
     ├ about.html               센터 소개 · 센터장 인사말
@@ -29,8 +29,8 @@ GitHub 저장소 (screamingpeanut01/ku_entbs_page)
 - **서버·DB 없음.** HTML/CSS/JS/JSON 파일만 GitHub Pages에 올라갑니다. 호스팅 비용 0원.
 - **자동 배포.** `main` 브랜치의 `site/` 폴더가 바뀌면 GitHub Actions가 `gh-pages` 브랜치에 복사하고, GitHub Pages가 그 브랜치를 서빙합니다. 1~2분 내 반영.
 - `gh-pages` 브랜치는 자동 생성물이므로 **직접 편집하지 않습니다.** 항상 `main`의 `site/`만 수정합니다.
-- 배포 주소(테스트): `https://screamingpeanut01.github.io/ku_entbs_page/`
-- 관리자 화면: `https://screamingpeanut01.github.io/ku_entbs_page/admin/`
+- 배포 주소(테스트): `https://entbslab.github.io/entbs-lab/`
+- 관리자 화면: `https://entbslab.github.io/entbs-lab/admin/`
 
 ## 2. 콘텐츠 수정 (기본: 관리자 화면)
 
@@ -66,7 +66,8 @@ GitHub 저장소 (screamingpeanut01/ku_entbs_page)
 ## 5. 저장소 관리
 
 ### 계정·권한
-- 저장소 소유자: 현재 개인 계정(`screamingpeanut01`). **장기 운영을 위해 센터용 GitHub Organization(예: `ku-cesm`)을 만들어 저장소를 이관(Transfer)하는 것을 권장.** 담당자가 바뀌어도 조직이 소유하므로 계정 문제로 사이트가 사라지지 않음. 이관 후에는 `site/admin/config.yml`의 `repo:` 값을 새 경로로 바꿔야 함.
+- 저장소 소유자: 센터 GitHub 조직 `entbslab`. 담당자가 바뀌어도 조직이 소유하므로 계정 문제로 사이트가 사라지지 않음. 조직 Owner는 최소 두 명(교수님 + 담당자) 유지.
+- 관리자 추가(권장): 조직 Settings → People → Invite member → 상대 GitHub 아이디. 저장소 권한은 Write 이상
 - 관리자 추가: Settings → Collaborators → Add people → 상대 GitHub 아이디 → 권한 `Write`. 수락하면 관리자 화면 로그인도 가능
 - 교수님 계정은 `Admin`, 조교는 `Write` 권장
 
@@ -108,7 +109,7 @@ GitHub 저장소 (screamingpeanut01/ku_entbs_page)
    A     @    185.199.109.153
    A     @    185.199.110.153
    A     @    185.199.111.153
-   CNAME www  screamingpeanut01.github.io
+   CNAME www  entbslab.github.io
    ```
 3. 10분~수 시간 후 Settings → Pages 에서 DNS check 성공 → **Enforce HTTPS** 체크
 4. www 주소는 GitHub Pages가 자동으로 apex 도메인으로 넘겨줍니다. 사이트 코드에는 도메인이 들어 있지 않아 고칠 파일이 없습니다.
@@ -122,4 +123,4 @@ GitHub 저장소 (screamingpeanut01/ku_entbs_page)
 2. 관리자 화면 GitHub 로그인 설정 완료 (`ADMIN_SETUP.md` 1~5단계)
 3. 소개·설정 → 사이트 설정 → 상단 안내 배너 비우기
 4. 도메인 구매·연결
-5. 저장소를 센터 Organization으로 이관, 관리자 권한 정리
+5. 조직 관리자 권한 정리 (Owner 두 명 이상)
