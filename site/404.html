@@ -18,10 +18,5 @@
   <p>요청하신 페이지를 찾을 수 없습니다.</p>
   <a href="/">홈으로</a>
 </div>
-<script>
-  // github.io 프로젝트 주소(/<저장소이름>/)와 전용 도메인(/) 둘 다에서 홈으로 가도록 처리
-  const seg = location.pathname.split('/')[1];
-  document.querySelector('a').href = (location.hostname.endsWith('github.io') && seg) ? '/' + seg + '/' : '/';
-</script>
 </body>
 </html>
