@@ -7,7 +7,7 @@
 
 backend:
   name: github
-  repo: entbslab/entbs-lab
+  repo: entbslab/entbslab.github.io
   branch: main
   base_url: https://REPLACE-ME.workers.dev   # ← 인증 Worker 주소 (예: https://ku-cesm-auth.username.workers.dev)
   commit_messages:

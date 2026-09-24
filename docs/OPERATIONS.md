@@ -7,7 +7,7 @@
 ## 1. 구조 한눈에 보기
 
 ```
-GitHub 저장소 (entbslab/entbs-lab)
+GitHub 저장소 (entbslab/entbslab.github.io)
  └ site/                       ← 실제로 배포되는 웹사이트 폴더
     ├ index.html               홈
     ├ about.html               센터 소개 · 센터장 인사말
@@ -29,8 +29,8 @@ GitHub 저장소 (entbslab/entbs-lab)
 - **서버·DB 없음.** HTML/CSS/JS/JSON 파일만 GitHub Pages에 올라갑니다. 호스팅 비용 0원.
 - **자동 배포.** `main` 브랜치의 `site/` 폴더가 바뀌면 GitHub Actions가 `gh-pages` 브랜치에 복사하고, GitHub Pages가 그 브랜치를 서빙합니다. 1~2분 내 반영.
 - `gh-pages` 브랜치는 자동 생성물이므로 **직접 편집하지 않습니다.** 항상 `main`의 `site/`만 수정합니다.
-- 배포 주소(테스트): `https://entbslab.github.io/entbs-lab/`
-- 관리자 화면: `https://entbslab.github.io/entbs-lab/admin/`
+- 배포 주소(테스트): `https://entbslab.github.io/`
+- 관리자 화면: `https://entbslab.github.io/admin/`
 
 ## 2. 콘텐츠 수정 (기본: 관리자 화면)
 

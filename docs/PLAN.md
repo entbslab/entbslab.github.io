@@ -161,7 +161,7 @@ CONTACT      위치·연락처
 
 ## 6. 목업 저장소 구조 (2단계부터)
 ```
-entbs-lab/
+entbslab.github.io/
 ├ docs/PLAN.md            ← 이 문서
 ├ mockup/                 ← 2단계: 순수 HTML/CSS 목업
 │  ├ index.html

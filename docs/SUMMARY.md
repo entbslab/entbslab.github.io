@@ -1,6 +1,6 @@
 # 센터 홈페이지 운영 개요 (작동 방식 · 유지보수 · 비용 · 계정)
 
-작성일: 2026-09-21 · 기준: 테스트 배포 상태 (https://entbslab.github.io/entbs-lab/)
+작성일: 2026-09-21 · 기준: 테스트 배포 상태 (https://entbslab.github.io/)
 
 ---
 
