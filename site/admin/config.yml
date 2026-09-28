@@ -9,7 +9,7 @@ backend:
   name: github
   repo: entbslab/entbslab.github.io
   branch: main
-  base_url: https://REPLACE-ME.workers.dev   # ← 인증 Worker 주소 (예: https://ku-cesm-auth.username.workers.dev)
+  base_url: https://entbslab-cms-auth.1029lg-fcb.workers.dev   # 로그인 중계 Worker (Cloudflare, 저장소 entbslab/entbslab-cms-auth)
   commit_messages:
     create: "관리자: {{collection}} 추가 - {{slug}}"
     update: "관리자: {{collection}} 수정 - {{slug}}"
