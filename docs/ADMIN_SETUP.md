@@ -8,6 +8,14 @@ GitHub Pages에는 서버 코드가 없어 로그인 중계 역할을 하는 작
 
 필요한 것: 저장소 소유 GitHub 계정 로그인, Cloudflare 무료 계정 (없으면 https://dash.cloudflare.com/sign-up 에서 이메일로 생성)
 
+> **현재 설정 상태 (2026-09-28 완료)**
+> - Worker: `https://entbslab-cms-auth.1029lg-fcb.workers.dev` (Cloudflare 계정 1029lg@naver.com, 코드 저장소 `entbslab/entbslab-cms-auth`)
+> - GitHub OAuth 앱: entbslab 조직 Settings → Developer settings → OAuth Apps
+> - Worker 변수: `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, `ALLOWED_DOMAINS` = `entbslab.github.io`
+> - `site/admin/config.yml`의 `base_url`에 Worker 주소 반영됨
+>
+> 아래 절차는 Worker를 새로 만들거나 담당자가 바뀌어 다시 설정할 때 참고용입니다.
+
 ---
 
 ## 0단계. Worker 설정 전에 지금 바로 써보기 (토큰 로그인)
