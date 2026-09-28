@@ -49,25 +49,23 @@ collections:
       - { name: image, label: 사진, widget: image, required: false }
       - { name: file, label: 첨부파일, widget: file, required: false }
 
-  - name: news
-    label: 센터 소식
-    label_singular: 소식
-    icon: newspaper
-    folder: site/data/news
+  - name: resources
+    label: 공지사항 · 자료실
+    label_singular: 자료
+    icon: folder
+    folder: site/data/resources
     extension: json
     format: json
     create: true
     delete: true
     slug: "{{year}}{{month}}{{day}}-{{uuid_shorter}}"
-    summary: "{{date}} · [{{tag}}] {{title}}"
-    sortable_fields: [date, title, tag]
+    summary: "{{date}} · {{title}}"
+    sortable_fields: [date, title]
     fields:
       - { name: title, label: 제목, widget: string }
       - { name: date, label: 날짜, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, default: "{{now}}" }
-      - { name: tag, label: 분류, widget: select, options: [행사, 언론, 연구, 수상, 기타], default: 행사 }
-      - { name: summary, label: 요약, widget: text, required: false }
-      - { name: link, label: 외부 링크(기사 등), widget: string, required: false }
-      - { name: image, label: 대표 이미지, widget: image, required: false }
+      - { name: file, label: 파일, widget: file, required: false }
+      - { name: desc, label: 설명(형식·용량 등), widget: string, required: false }
 
   - name: members
     label: 연구진
@@ -92,7 +90,7 @@ collections:
       - { name: order, label: 표시 순서 (작을수록 앞), widget: number, value_type: int, default: 100, required: false }
 
   - name: projects
-    label: 연구 프로젝트
+    label: 성과 · 연구 프로젝트
     label_singular: 프로젝트
     icon: work
     folder: site/data/projects
@@ -111,7 +109,7 @@ collections:
       - { name: order, label: 표시 순서 (작을수록 앞), widget: number, value_type: int, default: 100, required: false }
 
   - name: publications
-    label: 논문·출판
+    label: 성과 · 논문·출판
     label_singular: 논문
     icon: menu_book
     folder: site/data/publications
@@ -131,7 +129,7 @@ collections:
       - { name: link, label: 링크(DOI 등), widget: string, required: false }
 
   - name: seminars
-    label: 세미나·포럼
+    label: 성과 · 세미나·포럼
     label_singular: 세미나
     icon: event
     folder: site/data/seminars
@@ -148,23 +146,25 @@ collections:
       - { name: speaker, label: 발표자, widget: string, required: false }
       - { name: place, label: 장소, widget: string, required: false }
 
-  - name: resources
-    label: 자료실
-    label_singular: 자료
-    icon: folder
-    folder: site/data/resources
+  - name: news
+    label: 성과 · 센터 소식
+    label_singular: 소식
+    icon: newspaper
+    folder: site/data/news
     extension: json
     format: json
     create: true
     delete: true
     slug: "{{year}}{{month}}{{day}}-{{uuid_shorter}}"
-    summary: "{{date}} · {{title}}"
-    sortable_fields: [date, title]
+    summary: "{{date}} · [{{tag}}] {{title}}"
+    sortable_fields: [date, title, tag]
     fields:
       - { name: title, label: 제목, widget: string }
       - { name: date, label: 날짜, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, default: "{{now}}" }
-      - { name: file, label: 파일, widget: file, required: false }
-      - { name: desc, label: 설명(형식·용량 등), widget: string, required: false }
+      - { name: tag, label: 분류, widget: select, options: [행사, 언론, 연구, 수상, 기타], default: 행사 }
+      - { name: summary, label: 요약, widget: text, required: false }
+      - { name: link, label: 외부 링크(기사 등), widget: string, required: false }
+      - { name: image, label: 대표 이미지, widget: image, required: false }
 
   # ---------- 단일 페이지 설정 ----------
   - name: pages

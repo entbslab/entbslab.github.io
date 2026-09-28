@@ -126,3 +126,13 @@ p{margin:0 0 1em}
 .site-footer a:hover{color:#fff}
 .site-footer .copy{grid-column:1/-1;border-top:1px solid #2a2a2e;padding-top:18px;font-size:.78rem;color:#8a8a92}
 .banner{background:#fff4cc;color:#5a4300;text-align:center;font-size:.82rem;padding:8px 12px}
+
+/* performance / notice: one page, sections stacked (no tabs) */
+.jump{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px}
+.jump a{padding:.45em 1em;border:1px solid var(--line);border-radius:999px;font-weight:600;font-size:.9rem;color:#333}
+.jump a:hover{border-color:var(--crimson);color:var(--crimson)}
+.perf-block{margin-bottom:64px;scroll-margin-top:88px}
+.perf-block:last-child{margin-bottom:0}
+.perf-block>h2{padding-bottom:12px;border-bottom:2px solid var(--ink);margin-bottom:20px}
+.year-head{font-size:1rem;color:var(--crimson);margin:24px 0 4px}
+.year-head:first-child{margin-top:0}

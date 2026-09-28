@@ -19,16 +19,43 @@
     "transit": "지하철 6호선 안암역(고대병원앞) 1번 출구 도보 10분"
   },
   "nav": [
-    { "label": "HOME", "href": "index.html" },
-    { "label": "ABOUT", "href": "about.html" },
-    { "label": "PEOPLE", "href": "people.html" },
-    { "label": "RESEARCH", "href": "research.html" },
-    { "label": "NEWS", "href": "news.html" },
-    { "label": "CONTACT", "href": "contact.html" }
+    {
+      "label": "HOME",
+      "href": "index.html"
+    },
+    {
+      "label": "ABOUT",
+      "href": "about.html"
+    },
+    {
+      "label": "PEOPLE",
+      "href": "people.html"
+    },
+    {
+      "label": "PERFORMANCE",
+      "href": "performance.html"
+    },
+    {
+      "label": "NOTICE",
+      "href": "notice.html"
+    },
+    {
+      "label": "CONTACT",
+      "href": "contact.html"
+    }
   ],
   "links": [
-    { "label": "고려대학교 미디어학부", "href": "https://mediacom.korea.ac.kr/" },
-    { "label": "센터 소개 (미디어학부)", "href": "https://mediacom.korea.ac.kr/laboratory/center05.html" },
-    { "label": "고려대학교", "href": "https://www.korea.ac.kr/" }
+    {
+      "label": "고려대학교 미디어학부",
+      "href": "https://mediacom.korea.ac.kr/"
+    },
+    {
+      "label": "센터 소개 (미디어학부)",
+      "href": "https://mediacom.korea.ac.kr/laboratory/center05.html"
+    },
+    {
+      "label": "고려대학교",
+      "href": "https://www.korea.ac.kr/"
+    }
   ]
 }

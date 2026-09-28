@@ -23,7 +23,7 @@
     <p id="hero-sub"></p>
     <div class="actions">
       <a class="btn solid" href="about.html">센터 소개</a>
-      <a class="btn" href="research.html">연구 활동</a>
+      <a class="btn" href="performance.html">성과 보기</a>
     </div>
   </div>
 </section>
@@ -44,28 +44,18 @@
       <div>
         <div class="section-head">
           <div><span class="eyebrow">News</span><h2>센터 소식</h2></div>
-          <a class="more" href="news.html#news">전체 보기 →</a>
+          <a class="more" href="performance.html#news">전체 보기 →</a>
         </div>
         <div class="grid c3" id="news"></div>
       </div>
       <div>
         <div class="section-head">
           <div><span class="eyebrow">Notice</span><h2>공지사항</h2></div>
-          <a class="more" href="news.html#notice">전체 보기 →</a>
+          <a class="more" href="notice.html">전체 보기 →</a>
         </div>
         <ul class="list" id="notices"></ul>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="section-head">
-      <div><span class="eyebrow">People</span><h2>연구진</h2></div>
-      <a class="more" href="people.html">전체 보기 →</a>
-    </div>
-    <div class="grid c5" id="members"></div>
   </div>
 </section>
 
@@ -77,11 +67,9 @@ window.render = function (S) {
   document.getElementById('areas').innerHTML = S.areas.map((a, i) =>
     `<div class="card"><div class="num">0${i + 1}</div><h3>${a.title}</h3><p>${a.desc}</p></div>`).join('');
   document.getElementById('news').innerHTML = [...S.news].sort(byDateDesc).slice(0, 3).map(n =>
-    `<a class="card" href="news.html#news">${n.image ? `<img class="thumb" src="${n.image}" alt="" style="object-fit:cover">` : '<div class="thumb">NEWS</div>'}<span class="tag">${n.tag}</span><span class="date">${fmtDate(n.date)}</span><h3 style="margin-top:.4em">${n.title}</h3><p>${n.summary || ''}</p></a>`).join('');
+    `<a class="card" href="performance.html#news">${n.image ? `<img class="thumb" src="${n.image}" alt="" style="object-fit:cover">` : '<div class="thumb">NEWS</div>'}<span class="tag">${n.tag}</span><span class="date">${fmtDate(n.date)}</span><h3 style="margin-top:.4em">${n.title}</h3><p>${n.summary || ''}</p></a>`).join('');
   document.getElementById('notices').innerHTML = [...S.notices].sort((a, b) => ((b.pinned ? 1 : 0) - (a.pinned ? 1 : 0)) || byDateDesc(a, b)).slice(0, 5).map(n =>
-    `<li>${n.pinned ? '<span class="pin">공지</span>' : ''}<a href="news.html#notice">${n.title}</a><span class="date" style="margin-left:auto">${fmtDate(n.date)}</span></li>`).join('');
-  document.getElementById('members').innerHTML = S.members.slice(0, 5).map(m =>
-    `<div class="member">${avatar(m)}<h3>${m.name}</h3><div class="role">${m.role}</div><div class="aff">${m.aff || ''}</div></div>`).join('');
+    `<li>${n.pinned ? '<span class="pin">공지</span>' : ''}<a href="notice.html">${n.title}</a><span class="date" style="margin-left:auto">${fmtDate(n.date)}</span></li>`).join('');
 };
 </script>
 <script src="assets/main.js"></script>

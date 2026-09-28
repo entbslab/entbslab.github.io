@@ -12,8 +12,9 @@ GitHub 저장소 (entbslab/entbslab.github.io)
     ├ index.html               홈
     ├ about.html               센터 소개 · 센터장 인사말
     ├ people.html              연구진
-    ├ research.html            연구 프로젝트 · 논문 · 세미나
-    ├ news.html                공지 · 소식 · 자료실
+    ├ performance.html         성과: 연구 프로젝트 · 논문 · 세미나 · 센터 소식 (한 페이지)
+    ├ notice.html              공지사항 · 자료실 (한 페이지)
+    ├ research.html, news.html 예전 주소 → 새 페이지로 자동 이동
     ├ contact.html             오시는 길
     ├ admin/                   ★ 관리자 화면 (사이트주소/admin/). 설정은 admin/config.yml
     ├ data/                    ★ 모든 콘텐츠. 관리자 화면이 이 파일들을 고침
@@ -35,7 +36,7 @@ GitHub 저장소 (entbslab/entbslab.github.io)
 ## 2. 콘텐츠 수정 (기본: 관리자 화면)
 
 1. `사이트주소/admin/` 접속 → GitHub로 로그인 (최초 설정은 `docs/ADMIN_SETUP.md`)
-2. 왼쪽 메뉴에서 **공지사항 / 센터 소식 / 연구진 / 연구 프로젝트 / 논문·출판 / 세미나·포럼 / 자료실** 선택 → 목록 화면
+2. 왼쪽 메뉴에서 **공지사항 / 자료실 / 연구진 / 성과(연구 프로젝트·논문·출판·세미나·포럼·센터 소식)** 선택 → 목록 화면
 3. **새 항목** 버튼으로 추가, 목록에서 항목 클릭으로 수정, 항목 화면의 **삭제**로 삭제 → **저장**
 4. 소개문·인사말·연락처·메뉴·로고·배너는 **소개·설정** 메뉴
 5. 1~2분 뒤 사이트 새로고침(Ctrl+F5)으로 확인. 저장소 **Actions** 탭에 초록 체크가 뜨면 배포 완료

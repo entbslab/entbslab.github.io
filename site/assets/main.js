@@ -17,7 +17,7 @@
     resources: resources.items || []
   };
 
-  const path = location.pathname.split('/').pop() || 'index.html';
+  const path = (location.pathname.split('/').pop() || 'index').replace(/\.html$/, '') + '.html';
   const navHtml = S.nav.map(n => `<a href="${n.href}" class="${n.href === path ? 'active' : ''}">${n.label}</a>`).join('');
   document.getElementById('site-header').innerHTML = `
     <div class="container">
