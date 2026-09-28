@@ -8,6 +8,7 @@
 - 운영 개요(작동·비용·계정): [docs/SUMMARY.md](docs/SUMMARY.md)
 - 운영·저장소 관리 가이드: [docs/OPERATIONS.md](docs/OPERATIONS.md)
 - 관리자 화면 설정: [docs/ADMIN_SETUP.md](docs/ADMIN_SETUP.md)
+- 구조·계정·인수인계(도식): [docs/HANDOVER.md](docs/HANDOVER.md)
 
 ## 로컬 미리보기
 ```bash
