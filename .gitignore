@@ -10,3 +10,5 @@ site/data/projects.json
 site/data/publications.json
 site/data/seminars.json
 site/data/resources.json
+docs/pdf-src/p*.png
+docs/pdf-src/raw.pdf
