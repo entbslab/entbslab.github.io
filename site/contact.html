@@ -46,13 +46,13 @@
 window.render = function (S) {
   document.getElementById('addr').textContent = S.contact.address;
   document.getElementById('tel').textContent = S.contact.tel;
-  document.getElementById('email').innerHTML = `<a href="mailto:${S.contact.email}">${S.contact.email}</a>`;
+  setHTML('email', html`<a href="${safeUrl('mailto:' + S.contact.email)}">${S.contact.email}</a>`);
   document.getElementById('transit').textContent = S.contact.transit || '';
-  document.getElementById('map-link').href = S.contact.mapUrl || '#';
-  if (S.contact.mapEmbed) {
-    document.getElementById('map-box').innerHTML =
-      `<iframe src="${S.contact.mapEmbed}" title="지도" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-         style="width:100%;aspect-ratio:16/11;border:0;border-radius:10px" allowfullscreen></iframe>`;
+  document.getElementById('map-link').href = safeUrl(S.contact.mapUrl) || '#';
+  const embed = safeUrl(S.contact.mapEmbed);
+  if (/^https:\/\//i.test(embed)) {
+    setHTML('map-box', html`<iframe src="${embed}" title="지도" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+         style="width:100%;aspect-ratio:16/11;border:0;border-radius:10px" allowfullscreen></iframe>`);
   }
 };
 </script>

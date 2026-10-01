@@ -58,24 +58,26 @@
 <footer class="site-footer" id="site-footer"></footer>
 <script>
 window.render = function (S) {
-  const empty = '<p class="muted">등록된 항목이 없습니다.</p>';
-  document.getElementById('projects-list').innerHTML = S.projects.map(p =>
-    `<div class="card"><span class="tag">${p.period || ''}</span><span class="date">${p.sponsor || ''}</span><h3 style="margin-top:.5em">${p.title}</h3><p>${p.summary || ''}</p></div>`).join('') || empty;
+  const empty = raw('<p class="muted">등록된 항목이 없습니다.</p>');
+  const or = (items, fn, none) => items.length ? html`${items.map(fn)}` : none;
+  const ext = (href, label, style) => html`<a href="${safeUrl(href)}" target="_blank" rel="noopener"${style ? raw(' style="' + style + '"') : ''}>${label}</a>`;
+
+  setHTML('projects-list', or(S.projects, p =>
+    html`<div class="card"><span class="tag">${p.period}</span><span class="date">${p.sponsor}</span><h3 style="margin-top:.5em">${p.title}</h3><p>${p.summary}</p></div>`, empty));
 
   const pubs = [...S.publications].sort((a, b) => b.year - a.year);
   const years = [...new Set(pubs.map(p => p.year))];
-  document.getElementById('pub-list').innerHTML = years.map(y =>
-    `<h3 class="year-head">${y}</h3>` + pubs.filter(p => p.year === y).map(p =>
-      `<div class="pub"><span class="tag">${p.type}</span> ${(p.authors || '').replace(/\.$/, '')}. ${p.link ? `<a href="${p.link}" target="_blank" rel="noopener"><strong>${p.title}</strong></a>` : `<strong>${p.title}</strong>`}. <span class="venue">${p.venue || ''}</span></div>`).join('')
-  ).join('') || empty;
+  setHTML('pub-list', or(years, y => html`<h3 class="year-head">${y}</h3>${pubs.filter(p => p.year === y).map(p =>
+    html`<div class="pub"><span class="tag">${p.type}</span> ${(p.authors || '').replace(/\.$/, '')}. ${p.link ? ext(p.link, html`<strong>${p.title}</strong>`) : html`<strong>${p.title}</strong>`}. <span class="venue">${p.venue}</span></div>`)}`, empty));
 
-  document.getElementById('sem-list').innerHTML = [...S.seminars].sort(byDateDesc).map(s =>
-    `<li><span class="date">${fmtDate(s.date)}</span><div><strong>${s.title}</strong><div class="muted" style="font-size:.85rem">${[s.speaker, s.place].filter(Boolean).join(' · ')}</div></div></li>`).join('') || `<li>${empty}</li>`;
+  setHTML('sem-list', or([...S.seminars].sort(byDateDesc), s =>
+    html`<li><span class="date">${fmtDate(s.date)}</span><div><strong>${s.title}</strong><div class="muted" style="font-size:.85rem">${[s.speaker, s.place].filter(Boolean).join(' · ')}</div></div></li>`, html`<li>${empty}</li>`));
 
-  document.getElementById('news-list').innerHTML = [...S.news].sort(byDateDesc).map(n =>
-    `<div class="card">${n.image ? `<img class="thumb" src="${n.image}" alt="" style="object-fit:cover">` : '<div class="thumb">NEWS</div>'}<span class="tag">${n.tag}</span><span class="date">${fmtDate(n.date)}</span><h3 style="margin-top:.4em">${n.title}</h3><p>${n.summary || ''}</p>${n.link ? `<p style="margin-top:8px"><a href="${n.link}" target="_blank" rel="noopener" style="color:var(--crimson);font-weight:600">기사 보기 →</a></p>` : ''}</div>`).join('') || empty;
+  setHTML('news-list', or([...S.news].sort(byDateDesc), n =>
+    html`<div class="card">${n.image ? html`<img class="thumb" src="${safeUrl(n.image)}" alt="" style="object-fit:cover">` : raw('<div class="thumb">NEWS</div>')}<span class="tag">${n.tag}</span><span class="date">${fmtDate(n.date)}</span><h3 style="margin-top:.4em">${n.title}</h3><p>${n.summary}</p>${n.link ? html`<p style="margin-top:8px">${ext(n.link, '기사 보기 →', 'color:var(--crimson);font-weight:600')}</p>` : ''}</div>`, empty));
 
-  if (location.hash) document.querySelector(location.hash)?.scrollIntoView();
+  const t = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+  if (t) t.scrollIntoView();
 };
 </script>
 <script src="assets/main.js"></script>

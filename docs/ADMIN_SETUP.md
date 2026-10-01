@@ -9,7 +9,7 @@ GitHub Pages에는 서버 코드가 없어 로그인 중계 역할을 하는 작
 필요한 것: 저장소 소유 GitHub 계정 로그인, Cloudflare 무료 계정 (없으면 https://dash.cloudflare.com/sign-up 에서 이메일로 생성)
 
 > **현재 설정 상태 (2026-09-28 완료)**
-> - Worker: `https://entbslab-cms-auth.1029lg-fcb.workers.dev` (Cloudflare 계정 1029lg@naver.com, 코드 저장소 `entbslab/entbslab-cms-auth`)
+> - Worker: `https://entbslab-cms-auth.1029lg-fcb.workers.dev` (Cloudflare 계정: 김권택 개인 계정, 코드 저장소 `entbslab/entbslab-cms-auth`)
 > - GitHub OAuth 앱: entbslab 조직 Settings → Developer settings → OAuth Apps
 > - Worker 변수: `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, `ALLOWED_DOMAINS` = `entbslab.github.io`
 > - `site/admin/config.yml`의 `base_url`에 Worker 주소 반영됨
@@ -127,3 +127,18 @@ Worker 없이도 관리 화면을 쓸 수 있는 임시 방법입니다. 관리�
 
 ## 참고: 관리 화면 없이도 편집 가능
 관리 화면이 잠시 안 되더라도 `site/data/*.json` 파일을 GitHub 웹에서 직접 고치면 동일하게 반영됩니다. 데이터는 항상 저장소에 있고, 관리 화면은 그 파일을 편하게 고치는 도구일 뿐입니다.
+
+---
+
+## 관리자 화면 프로그램 업데이트 (보안)
+
+`site/admin/index.html`은 Sveltia CMS를 **버전 고정 + 무결성 해시(SRI)** 로 불러옵니다. 외부 배포처의 파일이 바뀌거나 변조되면 브라우저가 실행을 거부하므로, 관리자의 GitHub 권한이 새어 나갈 위험을 막습니다. 대신 새 버전은 자동으로 적용되지 않습니다.
+
+업데이트가 필요할 때(새 기능이 필요하거나 보안 공지가 있을 때만):
+
+```bash
+V=$(npm view @sveltia/cms version)
+curl -sL "https://cdn.jsdelivr.net/npm/@sveltia/cms@$V/dist/sveltia-cms.js" | openssl dgst -sha384 -binary | openssl base64 -A
+```
+
+출력된 값을 `sha384-` 뒤에 붙여 `integrity`에 넣고, 주소의 버전 숫자를 `$V`로 바꿔 커밋합니다. 관리자 화면이 하얗게 뜨면 해시나 버전이 서로 맞지 않는 것입니다.

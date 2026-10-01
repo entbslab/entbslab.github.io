@@ -43,10 +43,10 @@
 <footer class="site-footer" id="site-footer"></footer>
 <script>
 window.render = function (S) {
-  const card = m => `<div class="card member">${avatar(m)}<h3>${m.name}</h3><div class="role">${m.role}</div><div class="aff">${m.aff || ''}</div>${m.field ? `<p style="margin-top:8px">${m.field}</p>` : ''}${m.email ? `<p><a href="mailto:${m.email}">${m.email}</a></p>` : ''}</div>`;
-  document.getElementById('director').innerHTML = S.members.filter(m => m.role === '센터장').map(card).join('');
-  document.getElementById('co').innerHTML = S.members.filter(m => m.role === '공동연구원').map(card).join('');
-  document.getElementById('fellow').innerHTML = S.members.filter(m => m.role !== '센터장' && m.role !== '공동연구원').map(card).join('');
+  const card = m => html`<div class="card member">${avatar(m)}<h3>${m.name}</h3><div class="role">${m.role}</div><div class="aff">${m.aff}</div>${m.field ? html`<p style="margin-top:8px">${m.field}</p>` : ''}${m.email ? html`<p><a href="${safeUrl('mailto:' + m.email)}">${m.email}</a></p>` : ''}</div>`;
+  setHTML('director', html`${S.members.filter(m => m.role === '센터장').map(card)}`);
+  setHTML('co', html`${S.members.filter(m => m.role === '공동연구원').map(card)}`);
+  setHTML('fellow', html`${S.members.filter(m => m.role !== '센터장' && m.role !== '공동연구원').map(card)}`);
 };
 </script>
 <script src="assets/main.js"></script>

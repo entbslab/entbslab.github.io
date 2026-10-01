@@ -56,12 +56,16 @@ window.render = function (S) {
   document.getElementById('mv-ko').textContent = S.tagline.ko;
 
   // 배너 사진: heroImages(여러 장) → heroImage(한 장) → 없으면 단색 배경
-  const imgs = (S.heroImages || []).map(x => typeof x === 'string' ? x : x.image).filter(Boolean);
-  if (!imgs.length && S.heroImage) imgs.push(S.heroImage);
+  const imgs = (S.heroImages || []).map(x => typeof x === 'string' ? x : x.image).map(cssUrl).filter(Boolean);
+  if (!imgs.length && cssUrl(S.heroImage)) imgs.push(cssUrl(S.heroImage));
   const box = document.getElementById('mv-slides');
-  box.innerHTML = imgs.length
-    ? imgs.map((src, i) => `<div class="mv-slide${i ? '' : ' on'}" style="background-image:url('${src}')"></div>`).join('')
-    : '<div class="mv-slide on mv-plain"></div>';
+  box.replaceChildren();
+  (imgs.length ? imgs : ['']).forEach((bg, i) => {
+    const d = document.createElement('div');
+    d.className = 'mv-slide' + (i ? '' : ' on') + (bg ? '' : ' mv-plain');
+    if (bg) d.style.backgroundImage = bg;   // cssUrl()이 주소를 검사·따옴표 처리
+    box.appendChild(d);
+  });
 
   if (imgs.length > 1) {
     const slides = box.children, ctrl = document.getElementById('mv-ctrl');

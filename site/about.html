@@ -63,13 +63,13 @@
 <script>
 window.render = function (S) {
   document.getElementById('mission').textContent = S.mission;
-  document.getElementById('areas').innerHTML = S.areas.map(a => `<li><strong>${a.title}</strong> — ${a.desc}</li>`).join('');
+  setHTML('areas', html`${S.areas.map(a => html`<li><strong>${a.title}</strong> — ${a.desc}</li>`)}`);
   document.getElementById('addr').textContent = S.contact.address;
-  document.getElementById('tel').innerHTML = `TEL ${S.contact.tel}<br><a href="mailto:${S.contact.email}">${S.contact.email}</a>`;
-  document.getElementById('greeting-body').innerHTML = (S.greeting.body || '').split(/\n\s*\n/).map(p => `<p>${p.trim()}</p>`).join('');
+  setHTML('tel', html`TEL ${S.contact.tel}<br><a href="${safeUrl('mailto:' + S.contact.email)}">${S.contact.email}</a>`);
+  setHTML('greeting-body', html`${(S.greeting.body || '').split(/\n\s*\n/).map(p => html`<p>${p.trim()}</p>`)}`);
   document.getElementById('greeting-name').textContent = S.greeting.name;
   document.getElementById('greeting-title').textContent = S.greeting.title;
-  if (S.greeting.photo) document.getElementById('greeting-photo').innerHTML = `<img src="${S.greeting.photo}" alt="${S.greeting.name}" style="border-radius:10px;max-width:340px">`;
+  if (S.greeting.photo) setHTML('greeting-photo', html`<img src="${safeUrl(S.greeting.photo)}" alt="${S.greeting.name}" style="border-radius:10px;max-width:340px">`);
 };
 </script>
 <script src="assets/main.js"></script>
