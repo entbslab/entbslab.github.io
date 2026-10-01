@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>공지사항 | 엔터테인먼트경영연구센터</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<meta name="description" content="공지사항, 자료실">
+<meta property="og:type" content="website">
+<meta property="og:title" content="공지사항 | 엔터테인먼트경영연구센터">
+<meta property="og:description" content="공지사항, 자료실">
+<meta property="og:site_name" content="Center for Entertainment Strategy and Management, Korea University">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header" id="site-header"></header>
+
+<section class="hero small">
+  <div class="container">
+    <span class="eyebrow">Notice</span>
+    <h1>공지사항</h1>
+    <p>센터 공지와 자료</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="perf-block" id="notice">
+      <ul class="list" id="notice-list"></ul>
+    </div>
+    <div class="perf-block" id="resources">
+      <h2>자료실</h2>
+      <ul class="list" id="res-list"></ul>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" id="site-footer"></footer>
+<script>
+window.render = function (S) {
+  const empty = raw('<li class="muted">등록된 항목이 없습니다.</li>');
+  const or = (items, fn, none) => items.length ? html`${items.map(fn)}` : none;
+  setHTML('notice-list', or([...S.notices].sort((a, b) => ((b.pinned ? 1 : 0) - (a.pinned ? 1 : 0)) || byDateDesc(a, b)), n =>
+    html`<li>${n.pinned ? raw('<span class="pin">공지</span>') : ''}<details style="flex:1"><summary style="cursor:pointer;font-weight:600">${n.title}</summary><p class="muted" style="margin:.6em 0 0">${n.body ? nl2br(n.body) : '(본문 없음)'}</p>${n.image ? html`<img class="notice-img" src="${safeUrl(n.image)}" alt="">` : ''}${n.file ? html`<p><a href="${safeUrl(n.file)}" target="_blank" rel="noopener" style="color:var(--crimson);font-weight:600">첨부파일 →</a></p>` : ''}</details><span class="date">${fmtDate(n.date)}</span></li>`, empty));
+  setHTML('res-list', or([...S.resources].sort(byDateDesc), r =>
+    html`<li><span class="date">${fmtDate(r.date)}</span>${r.file ? html`<a href="${safeUrl(r.file)}" target="_blank" rel="noopener">${r.title}</a>` : html`<span>${r.title}</span>`}<span class="muted" style="font-size:.85rem;margin-left:auto">${r.desc}</span></li>`, empty));
+  const t = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+  if (t) t.scrollIntoView();
+};
+</script>
+<script src="assets/main.js"></script>
+</body>
+</html>

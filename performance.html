@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>성과 | 엔터테인먼트경영연구센터</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<meta name="description" content="연구 프로젝트, 논문·출판, 세미나·포럼, 센터 소식">
+<meta property="og:type" content="website">
+<meta property="og:title" content="성과 | 엔터테인먼트경영연구센터">
+<meta property="og:description" content="연구 프로젝트, 논문·출판, 세미나·포럼, 센터 소식">
+<meta property="og:site_name" content="Center for Entertainment Strategy and Management, Korea University">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header" id="site-header"></header>
+
+<section class="hero small">
+  <div class="container">
+    <span class="eyebrow">Performance</span>
+    <h1>성과</h1>
+    <p>연구 프로젝트 · 논문·출판 · 세미나·포럼 · 센터 소식</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <nav class="jump">
+      <a href="#projects">연구 프로젝트</a>
+      <a href="#publications">논문·출판</a>
+      <a href="#seminars">세미나·포럼</a>
+      <a href="#news">센터 소식</a>
+    </nav>
+
+    <div class="perf-block" id="projects">
+      <h2>연구 프로젝트</h2>
+      <div class="grid c3" id="projects-list"></div>
+    </div>
+
+    <div class="perf-block" id="publications">
+      <h2>논문·출판</h2>
+      <div id="pub-list"></div>
+    </div>
+
+    <div class="perf-block" id="seminars">
+      <h2>세미나·포럼</h2>
+      <ul class="list" id="sem-list"></ul>
+    </div>
+
+    <div class="perf-block" id="news">
+      <h2>센터 소식</h2>
+      <div class="grid c3" id="news-list"></div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" id="site-footer"></footer>
+<script>
+window.render = function (S) {
+  const empty = raw('<p class="muted">등록된 항목이 없습니다.</p>');
+  const or = (items, fn, none) => items.length ? html`${items.map(fn)}` : none;
+  const ext = (href, label, style) => html`<a href="${safeUrl(href)}" target="_blank" rel="noopener"${style ? raw(' style="' + style + '"') : ''}>${label}</a>`;
+
+  setHTML('projects-list', or(S.projects, p =>
+    html`<div class="card"><span class="tag">${p.period}</span><span class="date">${p.sponsor}</span><h3 style="margin-top:.5em">${p.title}</h3><p>${p.summary}</p></div>`, empty));
+
+  const pubs = [...S.publications].sort((a, b) => b.year - a.year);
+  const years = [...new Set(pubs.map(p => p.year))];
+  setHTML('pub-list', or(years, y => html`<h3 class="year-head">${y}</h3>${pubs.filter(p => p.year === y).map(p =>
+    html`<div class="pub"><span class="tag">${p.type}</span> ${(p.authors || '').replace(/\.$/, '')}. ${p.link ? ext(p.link, html`<strong>${p.title}</strong>`) : html`<strong>${p.title}</strong>`}. <span class="venue">${p.venue}</span></div>`)}`, empty));
+
+  setHTML('sem-list', or([...S.seminars].sort(byDateDesc), s =>
+    html`<li><span class="date">${fmtDate(s.date)}</span><div><strong>${s.title}</strong><div class="muted" style="font-size:.85rem">${[s.speaker, s.place].filter(Boolean).join(' · ')}</div></div></li>`, html`<li>${empty}</li>`));
+
+  setHTML('news-list', or([...S.news].sort(byDateDesc), n =>
+    html`<div class="card">${n.image ? html`<img class="thumb" src="${safeUrl(n.image)}" alt="" style="object-fit:cover">` : raw('<div class="thumb">NEWS</div>')}<span class="tag">${n.tag}</span><span class="date">${fmtDate(n.date)}</span><h3 style="margin-top:.4em">${n.title}</h3><p>${n.summary}</p>${n.link ? html`<p style="margin-top:8px">${ext(n.link, '기사 보기 →', 'color:var(--crimson);font-weight:600')}</p>` : ''}</div>`, empty));
+
+  const t = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+  if (t) t.scrollIntoView();
+};
+</script>
+<script src="assets/main.js"></script>
+</body>
+</html>

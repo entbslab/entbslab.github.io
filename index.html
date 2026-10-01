@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>엔터테인먼트경영연구센터 | Center for Entertainment Strategy and Management</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<meta name="description" content="고려대학교 엔터테인먼트경영연구센터. 엔터테인먼트 산업과 경영의 다학제적 연구 허브.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="엔터테인먼트경영연구센터 | Center for Entertainment Strategy and Management">
+<meta property="og:description" content="고려대학교 엔터테인먼트경영연구센터. 엔터테인먼트 산업과 경영의 다학제적 연구 허브.">
+<meta property="og:site_name" content="Center for Entertainment Strategy and Management, Korea University">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="home">
+<header class="site-header" id="site-header"></header>
+
+<!-- 메인 배너: 관리자 화면 > 소개·설정 > 사이트 설정의 "홈 배너 사진"(여러 장이면 자동으로 넘어감) -->
+<section class="main-visual" id="main-visual" aria-label="메인 배너">
+  <div class="mv-slides" id="mv-slides"></div>
+  <div class="mv-caption container">
+    <p class="mv-eyebrow" id="mv-ko"></p>
+    <h1 id="mv-en"></h1>
+  </div>
+  <div class="mv-ctrl container" id="mv-ctrl" hidden>
+    <span id="mv-count">1 / 1</span>
+    <button type="button" id="mv-toggle" aria-label="일시정지">일시정지</button>
+  </div>
+</section>
+
+<!-- 바로가기 4개 -->
+<section class="quick container" aria-label="바로가기">
+  <a href="about.html">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></svg>
+    <strong>센터 소개</strong><span>설립 목적 · 인사말</span>
+  </a>
+  <a href="people.html">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.6c2.8.2 4.8 2 5.5 5.4"/></svg>
+    <strong>연구진</strong><span>센터장 · 공동연구원</span>
+  </a>
+  <a href="notice.html">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h3l6 4V6L7 10H4z"/><path d="M16.5 9a4 4 0 0 1 0 6M19 6.5a7.5 7.5 0 0 1 0 11"/></svg>
+    <strong>공지사항</strong><span>공지 · 자료실</span>
+  </a>
+  <a href="performance.html">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+    <strong>성과</strong><span>프로젝트 · 논문 · 세미나</span>
+  </a>
+</section>
+
+<footer class="site-footer" id="site-footer"></footer>
+<script>
+window.render = function (S) {
+  document.getElementById('mv-en').textContent = S.tagline.en;
+  document.getElementById('mv-ko').textContent = S.tagline.ko;
+
+  // 배너 사진: heroImages(여러 장) → heroImage(한 장) → 없으면 단색 배경
+  const imgs = (S.heroImages || []).map(x => typeof x === 'string' ? x : x.image).map(cssUrl).filter(Boolean);
+  if (!imgs.length && cssUrl(S.heroImage)) imgs.push(cssUrl(S.heroImage));
+  const box = document.getElementById('mv-slides');
+  box.replaceChildren();
+  (imgs.length ? imgs : ['']).forEach((bg, i) => {
+    const d = document.createElement('div');
+    d.className = 'mv-slide' + (i ? '' : ' on') + (bg ? '' : ' mv-plain');
+    if (bg) d.style.backgroundImage = bg;   // cssUrl()이 주소를 검사·따옴표 처리
+    box.appendChild(d);
+  });
+
+  if (imgs.length > 1) {
+    const slides = box.children, ctrl = document.getElementById('mv-ctrl');
+    const count = document.getElementById('mv-count'), btn = document.getElementById('mv-toggle');
+    let i = 0, timer = null;
+    const show = n => { slides[i].classList.remove('on'); i = (n + slides.length) % slides.length; slides[i].classList.add('on'); count.textContent = `${i + 1} / ${slides.length}`; };
+    const play = () => { timer = setInterval(() => show(i + 1), 5000); btn.textContent = '일시정지'; btn.setAttribute('aria-label', '일시정지'); };
+    const stop = () => { clearInterval(timer); timer = null; btn.textContent = '재생'; btn.setAttribute('aria-label', '재생'); };
+    btn.onclick = () => timer ? stop() : play();
+    ctrl.hidden = false; show(0); play();
+  }
+};
+</script>
+<script src="assets/main.js"></script>
+</body>
+</html>

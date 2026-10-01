@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>이동 중… | 엔터테인먼트경영연구센터</title>
+<meta http-equiv="refresh" content="0; url=notice.html">
+<script>
+  // 예전 소식 페이지 주소: 센터 소식은 성과 페이지로, 공지·자료실은 공지사항 페이지로 이동
+  location.replace(location.hash === '#news' ? 'performance.html#news' : 'notice.html' + (location.hash === '#resources' ? '#resources' : ''));
+</script>
+</head>
+<body><p><a href="notice.html">공지사항 페이지로 이동</a></p></body>
+</html>
