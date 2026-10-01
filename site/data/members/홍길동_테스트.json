@@ -1,0 +1,9 @@
+{
+  "name": "홍길동_테스트",
+  "role": "연구원",
+  "aff": "test",
+  "email": "test@test.com",
+  "field": "미디어",
+  "photo": "/assets/uploads/877_1419_234.jpg",
+  "order": 100
+}
