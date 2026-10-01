@@ -13,63 +13,66 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/style.css">
 </head>
-<body>
+<body class="home">
 <header class="site-header" id="site-header"></header>
 
-<section class="hero">
-  <div class="container">
-    <span class="eyebrow">Korea University · Media Hall</span>
-    <h1 id="hero-title"></h1>
-    <p id="hero-sub"></p>
-    <div class="actions">
-      <a class="btn solid" href="about.html">센터 소개</a>
-      <a class="btn" href="performance.html">성과 보기</a>
-    </div>
+<!-- 메인 배너: 관리자 화면 > 소개·설정 > 사이트 설정의 "홈 배너 사진"(여러 장이면 자동으로 넘어감) -->
+<section class="main-visual" id="main-visual" aria-label="메인 배너">
+  <div class="mv-slides" id="mv-slides"></div>
+  <div class="mv-caption container">
+    <p class="mv-eyebrow" id="mv-ko"></p>
+    <h1 id="mv-en"></h1>
+  </div>
+  <div class="mv-ctrl container" id="mv-ctrl" hidden>
+    <span id="mv-count">1 / 1</span>
+    <button type="button" id="mv-toggle" aria-label="일시정지">일시정지</button>
   </div>
 </section>
 
-<section class="section">
-  <div class="container">
-    <div class="section-head">
-      <div><span class="eyebrow">What we do</span><h2>주요 활동분야</h2></div>
-      <a class="more" href="about.html">더 보기 →</a>
-    </div>
-    <div class="grid c5" id="areas"></div>
-  </div>
-</section>
-
-<section class="section soft">
-  <div class="container">
-    <div class="split">
-      <div>
-        <div class="section-head">
-          <div><span class="eyebrow">News</span><h2>센터 소식</h2></div>
-          <a class="more" href="performance.html#news">전체 보기 →</a>
-        </div>
-        <div class="grid c3" id="news"></div>
-      </div>
-      <div>
-        <div class="section-head">
-          <div><span class="eyebrow">Notice</span><h2>공지사항</h2></div>
-          <a class="more" href="notice.html">전체 보기 →</a>
-        </div>
-        <ul class="list" id="notices"></ul>
-      </div>
-    </div>
-  </div>
+<!-- 바로가기 4개 -->
+<section class="quick container" aria-label="바로가기">
+  <a href="about.html">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></svg>
+    <strong>센터 소개</strong><span>설립 목적 · 인사말</span>
+  </a>
+  <a href="people.html">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.6c2.8.2 4.8 2 5.5 5.4"/></svg>
+    <strong>연구진</strong><span>센터장 · 공동연구원</span>
+  </a>
+  <a href="notice.html">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h3l6 4V6L7 10H4z"/><path d="M16.5 9a4 4 0 0 1 0 6M19 6.5a7.5 7.5 0 0 1 0 11"/></svg>
+    <strong>공지사항</strong><span>공지 · 자료실</span>
+  </a>
+  <a href="performance.html">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+    <strong>성과</strong><span>프로젝트 · 논문 · 세미나</span>
+  </a>
 </section>
 
 <footer class="site-footer" id="site-footer"></footer>
 <script>
 window.render = function (S) {
-  document.getElementById('hero-title').textContent = S.tagline.en;
-  document.getElementById('hero-sub').textContent = S.tagline.ko + ' — ' + S.mission;
-  document.getElementById('areas').innerHTML = S.areas.map((a, i) =>
-    `<div class="card"><div class="num">0${i + 1}</div><h3>${a.title}</h3><p>${a.desc}</p></div>`).join('');
-  document.getElementById('news').innerHTML = [...S.news].sort(byDateDesc).slice(0, 3).map(n =>
-    `<a class="card" href="performance.html#news">${n.image ? `<img class="thumb" src="${n.image}" alt="" style="object-fit:cover">` : '<div class="thumb">NEWS</div>'}<span class="tag">${n.tag}</span><span class="date">${fmtDate(n.date)}</span><h3 style="margin-top:.4em">${n.title}</h3><p>${n.summary || ''}</p></a>`).join('');
-  document.getElementById('notices').innerHTML = [...S.notices].sort((a, b) => ((b.pinned ? 1 : 0) - (a.pinned ? 1 : 0)) || byDateDesc(a, b)).slice(0, 5).map(n =>
-    `<li>${n.pinned ? '<span class="pin">공지</span>' : ''}<a href="notice.html">${n.title}</a><span class="date" style="margin-left:auto">${fmtDate(n.date)}</span></li>`).join('');
+  document.getElementById('mv-en').textContent = S.tagline.en;
+  document.getElementById('mv-ko').textContent = S.tagline.ko;
+
+  // 배너 사진: heroImages(여러 장) → heroImage(한 장) → 없으면 단색 배경
+  const imgs = (S.heroImages || []).map(x => typeof x === 'string' ? x : x.image).filter(Boolean);
+  if (!imgs.length && S.heroImage) imgs.push(S.heroImage);
+  const box = document.getElementById('mv-slides');
+  box.innerHTML = imgs.length
+    ? imgs.map((src, i) => `<div class="mv-slide${i ? '' : ' on'}" style="background-image:url('${src}')"></div>`).join('')
+    : '<div class="mv-slide on mv-plain"></div>';
+
+  if (imgs.length > 1) {
+    const slides = box.children, ctrl = document.getElementById('mv-ctrl');
+    const count = document.getElementById('mv-count'), btn = document.getElementById('mv-toggle');
+    let i = 0, timer = null;
+    const show = n => { slides[i].classList.remove('on'); i = (n + slides.length) % slides.length; slides[i].classList.add('on'); count.textContent = `${i + 1} / ${slides.length}`; };
+    const play = () => { timer = setInterval(() => show(i + 1), 5000); btn.textContent = '일시정지'; btn.setAttribute('aria-label', '일시정지'); };
+    const stop = () => { clearInterval(timer); timer = null; btn.textContent = '재생'; btn.setAttribute('aria-label', '재생'); };
+    btn.onclick = () => timer ? stop() : play();
+    ctrl.hidden = false; show(0); play();
+  }
 };
 </script>
 <script src="assets/main.js"></script>

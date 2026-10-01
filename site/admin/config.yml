@@ -210,7 +210,14 @@ collections:
               - { name: ko, label: 국문(부제), widget: string }
           - { name: testBanner, label: 상단 안내 배너 (비우면 숨김), widget: string, required: false }
           - { name: logo, label: 로고 이미지 (비우면 KU 글자 마크), widget: image, required: false, hint: "정사각형 PNG/SVG 권장" }
-          - { name: heroImage, label: 홈 배너 사진 (비우면 단색 배경), widget: image, required: false, hint: "가로 1600px 이상 권장. 어두운 톤이 글자와 잘 어울립니다" }
+          - name: heroImages
+            label: 홈 배너 사진 (여러 장이면 5초마다 넘어감, 비우면 단색 배경)
+            label_singular: 배너 사진
+            widget: list
+            required: false
+            hint: "가로 1600px 이상 권장. 어두운 톤이 글자와 잘 어울립니다. 첫 번째 사진은 다른 페이지 상단에도 쓰입니다"
+            fields:
+              - { name: image, label: 사진, widget: image }
           - name: contact
             label: 연락처
             widget: object

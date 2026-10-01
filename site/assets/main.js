@@ -42,9 +42,10 @@
       <div class="copy">&copy; ${new Date().getFullYear()} ${S.name.en}, Korea University. All rights reserved.</div>
     </div>`;
   const hero = document.querySelector('.hero');
-  if (hero && S.heroImage) {
+  const firstBanner = ((S.heroImages || [])[0] || {}).image || S.heroImage;
+  if (hero && firstBanner) {
     hero.classList.add('has-img');
-    hero.style.backgroundImage = `linear-gradient(120deg, rgba(43,0,16,.85), rgba(139,0,41,.6)), url("${S.heroImage}")`;
+    hero.style.backgroundImage = `linear-gradient(120deg, rgba(43,0,16,.85), rgba(139,0,41,.6)), url("${firstBanner}")`;
   }
   if (S.testBanner) {
     const b = document.createElement('div');

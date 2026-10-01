@@ -136,3 +136,26 @@ p{margin:0 0 1em}
 .perf-block>h2{padding-bottom:12px;border-bottom:2px solid var(--ink);margin-bottom:20px}
 .year-head{font-size:1rem;color:var(--crimson);margin:24px 0 4px}
 .year-head:first-child{margin-top:0}
+
+/* ===== 메인 화면 (icic 구성: 전체 폭 배너 + 바로가기 4개) ===== */
+.main-visual{position:relative;height:clamp(320px,52vw,520px);overflow:hidden;color:#fff}
+.mv-slides,.mv-slide{position:absolute;inset:0}
+.mv-slide{background-size:cover;background-position:center;opacity:0;transition:opacity 1s ease}
+.mv-slide.on{opacity:1}
+.mv-slide::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,0,8,.72) 0%,rgba(20,0,8,.35) 55%,rgba(20,0,8,.1) 100%)}
+.mv-plain{background:linear-gradient(120deg,#2b0010 0%,#8B0029 55%,#c23a5d 100%)}
+.mv-plain::after{background:repeating-linear-gradient(135deg,rgba(255,255,255,.035) 0 2px,transparent 2px 18px)}
+.mv-caption{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;justify-content:center;padding-bottom:70px}
+.mv-caption h1{font-size:clamp(1.9rem,4.6vw,3.2rem);letter-spacing:-.02em;margin:0;max-width:760px}
+.mv-eyebrow{font-size:clamp(.95rem,1.6vw,1.15rem);opacity:.92;margin:0 0 .6em;font-weight:500}
+.mv-ctrl{position:absolute;left:0;right:0;bottom:92px;z-index:2;display:flex;gap:10px;align-items:center;font-size:.85rem}
+.mv-ctrl button{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.5);color:#fff;border-radius:999px;padding:.25em .9em;font:inherit;cursor:pointer}
+.quick{position:relative;z-index:3;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:-56px;margin-bottom:72px}
+.quick a{background:#fff;border-radius:var(--radius);box-shadow:0 10px 30px rgba(0,0,0,.10);padding:26px 16px 22px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;transition:.2s;border-bottom:3px solid transparent}
+.quick a:hover{transform:translateY(-3px);border-bottom-color:var(--crimson)}
+.quick svg{width:38px;height:38px;fill:none;stroke:var(--crimson);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;margin-bottom:6px}
+.quick strong{font-size:1.05rem}
+.quick span{font-size:.82rem;color:var(--muted)}
+@media(max-width:720px){.quick{grid-template-columns:1fr 1fr;gap:12px;margin-top:-40px}.mv-ctrl{bottom:64px}.mv-caption{padding-bottom:50px}}
+body.home .site-footer{margin-top:0}
+.mv-ctrl[hidden]{display:none}
